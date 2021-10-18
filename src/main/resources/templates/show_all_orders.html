@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Orders</title>
+</head>
+<body>
+<div th:switch="${orders}">
+    <h2 th:case="null">No order found!</h2>
+    <br/>
+    <div style="color:red" th:case="*">
+        <h2 style="color:black" >ORDERS:</h2>
+        <table>
+            <thead>
+            <tr>
+                <th> &nbsp Id &nbsp</th>
+                <th>&nbsp customerEmail &nbsp</th>
+                <th>&nbsp order time &nbsp</th>
+                <th>&nbsp total price &nbsp</th>
+                <th>&nbsp product &nbsp</th>
+                <th>&nbsp quantity &nbsp</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="order : ${orders}">
+                <td style="color:green" th:text="${order.id}"></td>
+                <td style="color:green" th:text="${order.customerEmail}"></td>
+                <td style="color:green" th:text="${order.orderTime}"></td>
+                <td style="color:green" th:text="${order.orderDetails.totalPrice}"></td>
+                <td style="color:green" th:text="${order.orderDetails.product.name}"></td>
+                <td style="color:green" th:text="${order.orderDetails.numberOfProduct}"></td>
+                <td><a th:href="@{/orders/order-update/{id}(id=${order.id})}">EDIT &nbsp&nbsp </a>
+                    <br/></td>
+
+                <td><a th:href="@{/orders/order-delete/{id}(id=${order.id})}">DELETE</a></td>
+            </tr>
+            </tbody>
+        </table>
+        <br/>
+    </div>
+    <p><a href="/orders/new">  Create NEW order</a></p>
+</div>
+</body>
+</html>
