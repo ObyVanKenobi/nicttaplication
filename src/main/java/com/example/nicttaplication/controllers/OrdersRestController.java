@@ -5,6 +5,8 @@ import com.example.nicttaplication.converters.OrderConverter;
 import com.example.nicttaplication.models.Order;
 import com.example.nicttaplication.service.OrderService;
 import com.example.nicttaplication.service.ProductService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -18,6 +20,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "api/v1/orders")
+@Api(value = "CRUD СЕРВИС ДЛЯ ORDERS")
 public class OrdersRestController {
 
     private OrderService orderService;
@@ -32,6 +35,7 @@ public class OrdersRestController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "возврашает все заказы")
     public ResponseEntity<List<Order>> showAll(){
         List<Order> orders = orderService.findAll();
         if ((orders.isEmpty())){
@@ -41,6 +45,8 @@ public class OrdersRestController {
 
     }
     @PostMapping( produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "сохраняет новый заказ")
+
     public ResponseEntity<OrderDTO> saveOrder(@RequestBody @Valid OrderDTO orderDTO) {
         if (orderDTO == null) {
             return new ResponseEntity<OrderDTO>(HttpStatus.BAD_REQUEST);
@@ -51,6 +57,8 @@ public class OrdersRestController {
     }
 
     @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "обновляет выбранный заказ")
+
     public ResponseEntity<OrderDTO> updateOrder(@RequestBody @Valid OrderDTO orderDTO, UriComponentsBuilder builder) {
         HttpHeaders headers = new HttpHeaders();
 
@@ -64,6 +72,8 @@ public class OrdersRestController {
     }
 
     @DeleteMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "удаляет заказ")
+
     public ResponseEntity<Order> deleteOrder(@PathVariable("id") Long id) {
         Order order = this.orderService.findById(id);
 
