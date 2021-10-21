@@ -27,8 +27,13 @@ public class ProductService {
 
     }
 
-    public void  save(Product product){
-        repository.save(product);
+    public boolean save(Product product){
+        if(product != null) {
+            repository.save(product);
+            return true;
+
+        }
+        return false;
     }
 
     public void  deleteOrder(long id){
