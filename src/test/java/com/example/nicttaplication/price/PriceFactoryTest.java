@@ -8,11 +8,11 @@ class PriceFactoryTest {
     @Test
     void totalPrice() {
 
-        double price =55.00;
+        double price = 55.00;
         int quantity = 9;
-        double sum = price*quantity;
+        double sum = price * quantity;
 
         PriceFactory priceFactory = new PriceFactory();
-        Assert.isTrue(priceFactory.totalPrice(quantity,price)==sum,"ошибка цены");
+        Assert.isTrue(priceFactory.totalPrice(quantity, price) == sum, "ошибка цены");
     }
 }

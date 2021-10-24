@@ -24,8 +24,4 @@ public class OrderDetails {
     private Double totalPrice;
 
 
-    public OrderDetails(Product product, int numberOfProduct) {
-        this.product = product;
-        this.numberOfProduct = numberOfProduct;
-    }
 }

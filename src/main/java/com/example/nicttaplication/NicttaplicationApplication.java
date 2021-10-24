@@ -22,12 +22,12 @@ public class NicttaplicationApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        Product milk = new Product("milk",100.00);
-        productService.save(milk);
-        Product cheese = new Product("cheese",200.00);
-        productService.save(cheese);
-        Product fish = new Product("fish",300.00);
-        productService.save(fish);
+//        Product milk = new Product("milk", 100.00);
+//        productService.save(milk);
+//        Product cheese = new Product("cheese", 200.00);
+//        productService.save(cheese);
+//        Product fish = new Product("fish", 300.00);
+//        productService.save(fish);
 
 
     }

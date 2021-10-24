@@ -9,21 +9,20 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.util.Assert;
 
 
-
 @SpringBootTest
 class ProductServiceTest {
 
     @Autowired
-    private   ProductService productService;
+    private ProductService productService;
     @MockBean
     private ProductRepository productRepository;
 
 
     @Test
     void save() {
-        Product product = new Product("product",500.00);
+        Product product = new Product("product", 500.00);
         boolean b = productService.save(product);
-        Assert.isTrue(b,"product save error");
+        Assert.isTrue(b, "product save error");
     }
 
 }

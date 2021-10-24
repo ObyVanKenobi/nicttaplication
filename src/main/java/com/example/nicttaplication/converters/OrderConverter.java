@@ -15,12 +15,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Component
-public class OrderConverter  {
+public class OrderConverter {
 
-        final OrderService orderService;
-        final OrderDetailsService orderDetailsService;
-        final ProductService productService;
-        final PriceFactory priceFactory;
+    final OrderService orderService;
+    final OrderDetailsService orderDetailsService;
+    final ProductService productService;
+    final PriceFactory priceFactory;
 
     @Autowired
     public OrderConverter(OrderService orderService, OrderDetailsService orderDetailsService, ProductService productService, PriceFactory priceFactory) {
@@ -30,35 +30,36 @@ public class OrderConverter  {
         this.priceFactory = priceFactory;
     }
 
-
-    public Order convert(OrderDTO orderDTO){
-            Order order = new Order();
-            if(orderDTO.getId() != null) {
-                order = orderService.findById(orderDTO.getId());
-                order.setCustomerEmail(orderDTO.getEmail());
-                if(orderDTO.getCountOfProduct() != null) {
-                    OrderDetails orderDetails = order.getOrderDetails();
-                    orderDetails.setNumberOfProduct(orderDTO.getCountOfProduct());
-                    orderDetails.setTotalPrice(priceFactory.totalPrice(orderDTO.getCountOfProduct(),orderDetails.getPrice()));
-                }
-
-            }
-            else {
-                Product product = productService.findById(orderDTO.getProductId());
-                OrderDetails orderDetails = new OrderDetails();
-
-                orderDetails.setProduct(product);
+/*
+конвертирует данные DTO в новый order или обновляет данные сушествуешего
+ */
+    public Order convert(OrderDTO orderDTO) {
+        Order order = new Order();
+        if (orderDTO.getId() != null) {
+            order = orderService.findById(orderDTO.getId());
+            order.setCustomerEmail(orderDTO.getEmail());
+            if (orderDTO.getCountOfProduct() != null) {
+                OrderDetails orderDetails = order.getOrderDetails();
                 orderDetails.setNumberOfProduct(orderDTO.getCountOfProduct());
-                orderDetails.setPrice(product.getPrice());
-                orderDetails.setTotalPrice(priceFactory.totalPrice(orderDTO.getCountOfProduct(), product.getPrice()));
-
-                order.setOrderDetails(orderDetails);
-                order.setCustomerEmail(orderDTO.getEmail());
-                order.setOrderTime(new SimpleDateFormat("dd-MM-yyyy").format(new Date()));
+                orderDetails.setTotalPrice(priceFactory.totalPrice(orderDTO.getCountOfProduct(), orderDetails.getPrice()));
             }
 
-            return order;
+        } else {
+            Product product = productService.findById(orderDTO.getProductId());
+            OrderDetails orderDetails = new OrderDetails();
+
+            orderDetails.setProduct(product);
+            orderDetails.setNumberOfProduct(orderDTO.getCountOfProduct());
+            orderDetails.setPrice(product.getPrice());
+            orderDetails.setTotalPrice(priceFactory.totalPrice(orderDTO.getCountOfProduct(), product.getPrice()));
+
+            order.setOrderDetails(orderDetails);
+            order.setCustomerEmail(orderDTO.getEmail());
+            order.setOrderTime(new SimpleDateFormat("dd-MM-yyyy").format(new Date()));
         }
 
+        return order;
     }
+
+}
 

@@ -36,18 +36,20 @@ public class OrdersRestController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "возврашает все заказы")
-    public ResponseEntity<List<Order>> showAll(){
+    public ResponseEntity<List<Order>> showAll() {
         List<Order> orders = orderService.findAll();
-        if ((orders.isEmpty())){
-            return  new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+        if ((orders.isEmpty())) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(orders, HttpStatus.OK);
 
     }
-    @PostMapping( produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "сохраняет новый заказ")
 
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "сохраняет новый заказ")
     public ResponseEntity<OrderDTO> saveOrder(@RequestBody @Valid OrderDTO orderDTO) {
+
         if (orderDTO == null) {
             return new ResponseEntity<OrderDTO>(HttpStatus.BAD_REQUEST);
         }
@@ -58,7 +60,6 @@ public class OrdersRestController {
 
     @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "обновляет выбранный заказ")
-
     public ResponseEntity<OrderDTO> updateOrder(@RequestBody @Valid OrderDTO orderDTO, UriComponentsBuilder builder) {
         HttpHeaders headers = new HttpHeaders();
 
@@ -73,7 +74,6 @@ public class OrdersRestController {
 
     @DeleteMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "удаляет заказ")
-
     public ResponseEntity<Order> deleteOrder(@PathVariable("id") Long id) {
         Order order = this.orderService.findById(id);
 
