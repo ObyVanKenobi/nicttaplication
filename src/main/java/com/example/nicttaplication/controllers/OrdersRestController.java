@@ -13,7 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -60,7 +59,7 @@ public class OrdersRestController {
 
     @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "обновляет выбранный заказ")
-    public ResponseEntity<OrderDTO> updateOrder(@RequestBody @Valid OrderDTO orderDTO, UriComponentsBuilder builder) {
+    public ResponseEntity<OrderDTO> updateOrder(@RequestBody @Valid OrderDTO orderDTO) {
         HttpHeaders headers = new HttpHeaders();
 
         if (orderDTO == null) {
