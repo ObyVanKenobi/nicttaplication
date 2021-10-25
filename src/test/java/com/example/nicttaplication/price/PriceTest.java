@@ -3,7 +3,7 @@ package com.example.nicttaplication.price;
 import org.junit.jupiter.api.Test;
 import org.springframework.util.Assert;
 
-class PriceFactoryTest {
+class PriceTest {
 
     @Test
     void totalPrice() {
@@ -11,8 +11,6 @@ class PriceFactoryTest {
         double price = 55.00;
         int quantity = 9;
         double sum = price * quantity;
-
-        PriceFactory priceFactory = new PriceFactory();
-        Assert.isTrue(priceFactory.totalPrice(quantity, price) == sum, "ошибка цены");
+        Assert.isTrue(Price.totalPrice(quantity, price) == sum, "ошибка цены");
     }
 }

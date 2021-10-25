@@ -4,7 +4,7 @@ import com.example.nicttaplication.DTO.OrderDTO;
 import com.example.nicttaplication.models.Order;
 import com.example.nicttaplication.models.OrderDetails;
 import com.example.nicttaplication.models.Product;
-import com.example.nicttaplication.price.PriceFactory;
+import com.example.nicttaplication.price.Price;
 import com.example.nicttaplication.service.OrderDetailsService;
 import com.example.nicttaplication.service.OrderService;
 import com.example.nicttaplication.service.ProductService;
@@ -20,14 +20,11 @@ public class OrderConverter {
     final OrderService orderService;
     final OrderDetailsService orderDetailsService;
     final ProductService productService;
-    final PriceFactory priceFactory;
-
     @Autowired
-    public OrderConverter(OrderService orderService, OrderDetailsService orderDetailsService, ProductService productService, PriceFactory priceFactory) {
+    public OrderConverter(OrderService orderService, OrderDetailsService orderDetailsService, ProductService productService) {
         this.orderService = orderService;
         this.orderDetailsService = orderDetailsService;
         this.productService = productService;
-        this.priceFactory = priceFactory;
     }
 
 /*
@@ -41,7 +38,7 @@ public class OrderConverter {
             if (orderDTO.getCountOfProduct() != null) {
                 OrderDetails orderDetails = order.getOrderDetails();
                 orderDetails.setNumberOfProduct(orderDTO.getCountOfProduct());
-                orderDetails.setTotalPrice(priceFactory.totalPrice(orderDTO.getCountOfProduct(), orderDetails.getPrice()));
+                orderDetails.setTotalPrice(Price.totalPrice(orderDTO.getCountOfProduct(), orderDetails.getPrice()));
             }
 
         } else {
@@ -51,7 +48,7 @@ public class OrderConverter {
             orderDetails.setProduct(product);
             orderDetails.setNumberOfProduct(orderDTO.getCountOfProduct());
             orderDetails.setPrice(product.getPrice());
-            orderDetails.setTotalPrice(priceFactory.totalPrice(orderDTO.getCountOfProduct(), product.getPrice()));
+            orderDetails.setTotalPrice(Price.totalPrice(orderDTO.getCountOfProduct(), product.getPrice()));
 
             order.setOrderDetails(orderDetails);
             order.setCustomerEmail(orderDTO.getEmail());
