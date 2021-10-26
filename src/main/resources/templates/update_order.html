@@ -13,9 +13,6 @@
   <input type="text" th:field="*{email}" id="email" placeholder="email">
   <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Name Error</div>
   <br/>
- <label for="countOfProduct">count of product</label>
- <input type="text" th:field="*{countOfProduct}" id="countOfProduct" placeholder="countOfProduct">
- <div style="color:red" th:if="${#fields.hasErrors('countOfProduct')}" th:errors="*{countOfProduct}">Name Error</div>
 
 
 <!-- <label for="orderDetails">orderDetails</label>-->

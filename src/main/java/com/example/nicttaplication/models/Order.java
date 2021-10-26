@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 @Data
@@ -27,12 +28,9 @@ public class Order {
 
     private String orderTime;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "orderDetails_id")
-    private OrderDetails orderDetails;
+    private List<OrderDetails> orderDetails;
 
-    public Order(String customerEmail, OrderDetails orderDetails) {
-        this.customerEmail = customerEmail;
-        this.orderDetails = orderDetails;
-    }
+
 }

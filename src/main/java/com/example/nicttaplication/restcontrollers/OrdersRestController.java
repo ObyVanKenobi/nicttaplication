@@ -1,6 +1,8 @@
-package com.example.nicttaplication.controllers;
+package com.example.nicttaplication.restcontrollers;
 
 import com.example.nicttaplication.DTO.OrderDTO;
+import com.example.nicttaplication.apiDTO.OrderApiDTO;
+import com.example.nicttaplication.apiDTO.OrderApiUpdateDTO;
 import com.example.nicttaplication.converters.OrderConverter;
 import com.example.nicttaplication.models.Order;
 import com.example.nicttaplication.service.OrderService;
@@ -47,42 +49,42 @@ public class OrdersRestController {
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "сохраняет новый заказ")
-    public ResponseEntity<OrderDTO> saveOrder(@RequestBody @Valid OrderDTO orderDTO) {
+    public ResponseEntity<OrderApiDTO> saveOrder(@RequestBody @Valid OrderApiDTO orderDTO) {
 
         if (orderDTO == null) {
-            return new ResponseEntity<OrderDTO>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<OrderApiDTO>(HttpStatus.BAD_REQUEST);
         }
 
-        this.orderService.save(orderConverter.convert(orderDTO));
+        this.orderService.save(orderConverter.convertApiDTO(orderDTO));
         return new ResponseEntity<>(orderDTO, HttpStatus.CREATED);
     }
 
     @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "обновляет выбранный заказ")
-    public ResponseEntity<OrderDTO> updateOrder(@RequestBody @Valid OrderDTO orderDTO) {
+    public ResponseEntity<OrderApiUpdateDTO> updateOrder(@RequestBody @Valid OrderApiUpdateDTO orderDTO) {
         HttpHeaders headers = new HttpHeaders();
 
         if (orderDTO == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        this.orderService.save(orderConverter.convert(orderDTO));
+        this.orderService.save(orderConverter.convertApiDTOForUpdate(orderDTO));
 
         return new ResponseEntity<>(orderDTO, headers, HttpStatus.OK);
     }
 
     @DeleteMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "удаляет заказ")
-    public ResponseEntity<Order> deleteOrder(@PathVariable("id") Long id) {
+    public ResponseEntity<OrderDTO> deleteOrder(@PathVariable("id") Long id) {
         Order order = this.orderService.findById(id);
 
         if (order == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<OrderDTO>(HttpStatus.NOT_FOUND);
         }
 
         this.orderService.deleteOrder(id);
 
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<OrderDTO>(HttpStatus.NO_CONTENT);
     }
 
 }

@@ -10,18 +10,24 @@
     <input type="text" th:field="*{email}" id="email" placeholder="email">
     <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Name Error</div>
     <br/>
-    <label for="countOfProduct">countOf</label>
-    <input type="text" th:field="*{countOfProduct}" id="countOfProduct" placeholder="enter countOf">
-    <div style="color:red" th:if="${#fields.hasErrors('countOfProduct')}" th:errors="*{countOfProduct}">Name Error</div>
-    <br/>
-    <label for="productId">product</label>
-    <select th:field="*{productId}" name="product" id="productId">
-<!--        <option value="null">select product</option>-->
-        <option th:each="product : ${products}" th:value="${product.id}"  th:text="${product.name}"></option>
-    </select>
+    <div th:each="product : ${products}">
+        <label >
+            <input th:field="*{productIdList}" th:text="${product.name}" th:type="checkbox" th:value="${product.id}" name="productId" />
+
+        </label>
+
+
+    </div>
+    <br>
+
+<!--    <label for="productId">product</label>-->
+<!--    <select multiple th:field="*{productId}" name="product" id="productId">-->
+<!--&lt;!&ndash;        <option value="null">select product</option>&ndash;&gt;-->
+<!--        <option th:each="product : ${products}" th:value="${product.id}"  th:text="${product.name}"></option>-->
+<!--    </select>-->
     <br/>
 <!--    <input type="text" th:field="*{productId}" id="productId" placeholder="select product">-->
-    <div style="color:red" th:if="${#fields.hasErrors('productId')}" th:errors="*{productId}">Name Error</div>
+<!--    <div style="color:red" th:if="${#fields.hasErrors('productId')}" th:errors="*{productId}">Name Error</div>-->
     <br/>
 
 

@@ -52,7 +52,6 @@ public class OrdersController {
 
     @PostMapping(value = "/order-create")
     public String creatOrder(@Valid OrderDTO orderDTO, BindingResult bindingResult) throws SQLException {
-
         if (bindingResult.hasErrors()) {
             return "order_create";
         }

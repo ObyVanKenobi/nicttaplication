@@ -16,9 +16,6 @@
                 <th> &nbsp Id &nbsp</th>
                 <th>&nbsp customerEmail &nbsp</th>
                 <th>&nbsp order time &nbsp</th>
-                <th>&nbsp total price &nbsp</th>
-                <th>&nbsp product &nbsp</th>
-                <th>&nbsp quantity &nbsp</th>
             </tr>
             </thead>
 
@@ -27,9 +24,6 @@
                 <td style="color:green" th:text="${order.id}"></td>
                 <td style="color:green" th:text="${order.customerEmail}"></td>
                 <td style="color:green" th:text="${order.orderTime}"></td>
-                <td style="color:green" th:text="${order.orderDetails.totalPrice}"></td>
-                <td style="color:green" th:text="${order.orderDetails.product.name}"></td>
-                <td style="color:green" th:text="${order.orderDetails.numberOfProduct}"></td>
                 <td><a th:href="@{/orders/order-update/{id}(id=${order.id})}">EDIT &nbsp&nbsp </a>
                     <br/></td>
 
