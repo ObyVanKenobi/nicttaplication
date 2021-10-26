@@ -5,9 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -20,14 +17,8 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @NotEmpty(message = "enter your email address")
-    @Size(min = 3, max = 50, message = "length must be more than 3 and less than 50 characters")
-    @Email(message = "enter correct email")
     private String customerEmail;
-
     private String orderTime;
-
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "orderDetails_id")
     private List<OrderDetails> orderDetails;

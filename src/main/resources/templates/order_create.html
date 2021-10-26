@@ -18,6 +18,8 @@
 
 
     </div>
+    <div style="color:red" th:if="${#fields.hasErrors('productIdList')}" th:errors="*{productIdList}">Name Error</div>
+
     <br>
 
 <!--    <label for="productId">product</label>-->
@@ -30,8 +32,10 @@
 <!--    <div style="color:red" th:if="${#fields.hasErrors('productId')}" th:errors="*{productId}">Name Error</div>-->
     <br/>
 
+    <p><a style="color:green" href="/orders/new"> RESET</a></p>
 
     <input type="submit" value="Create order">
+
 </form>
 </body>
 </html>

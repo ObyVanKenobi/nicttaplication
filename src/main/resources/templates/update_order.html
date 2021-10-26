@@ -7,21 +7,13 @@
 <form action="#" th:action="@{/orders/order-update}" th:object="${orderDTO}" method="post">
  <br/>
  <label for="id">ID</label>
- <input readonly type="number" th:field="*{id}" id="id" placeholder="ID">
+ <input readonly type="number" th:field="*{id}" id="id" placeholder="id">
  <br/>
   <label for="email">Email</label>
   <input type="text" th:field="*{email}" id="email" placeholder="email">
   <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Name Error</div>
   <br/>
 
-
-<!-- <label for="orderDetails">orderDetails</label>-->
-<!-- <input type="text" th:value="*{orderDetails}" id="orderDetails" placeholder="orderDetails">-->
-
- <!--  <label for="countOf">Email</label>-->
-<!--  <input type="text" th:field="*{countOf}" id="countOf" placeholder="countOf">-->
-<!--  <div style="color:red" th:if="${#fields.hasErrors('countOf')}" th:errors="*{countOf}">Name Error</div>-->
-<!--  <br/>-->
   <input type="submit" value="Update order">
 </form>
 </body>

@@ -1,8 +1,8 @@
 package com.example.nicttaplication.converters;
 
 import com.example.nicttaplication.DTO.OrderDTO;
-import com.example.nicttaplication.apiDTO.OrderApiDTO;
-import com.example.nicttaplication.apiDTO.OrderApiUpdateDTO;
+import com.example.nicttaplication.apiDTO.OrderCreateDTO;
+import com.example.nicttaplication.apiDTO.OrderUpdateDTO;
 import com.example.nicttaplication.models.Order;
 import com.example.nicttaplication.models.OrderDetails;
 import com.example.nicttaplication.models.Product;
@@ -61,7 +61,7 @@ public class OrderConverter {
 
     }
 
-    public Order convertApiDTO(OrderApiDTO orderDTO) {
+    public Order convertApiDTO(OrderCreateDTO orderDTO) {
         Order order = new Order();
         List<OrderDetails> orderDetailsList = new ArrayList<>();
 
@@ -83,7 +83,7 @@ public class OrderConverter {
 
     }
 
-    public Order convertApiDTOForUpdate(OrderApiUpdateDTO orderDTO) {
+    public Order convertApiDTOForUpdate(OrderUpdateDTO orderDTO) {
         Order order = orderService.findById(orderDTO.getId());
         order.setCustomerEmail(orderDTO.getEmail());
         return order;

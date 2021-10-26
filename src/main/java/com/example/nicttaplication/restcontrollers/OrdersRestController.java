@@ -1,8 +1,8 @@
 package com.example.nicttaplication.restcontrollers;
 
 import com.example.nicttaplication.DTO.OrderDTO;
-import com.example.nicttaplication.apiDTO.OrderApiDTO;
-import com.example.nicttaplication.apiDTO.OrderApiUpdateDTO;
+import com.example.nicttaplication.apiDTO.OrderCreateDTO;
+import com.example.nicttaplication.apiDTO.OrderUpdateDTO;
 import com.example.nicttaplication.converters.OrderConverter;
 import com.example.nicttaplication.models.Order;
 import com.example.nicttaplication.service.OrderService;
@@ -49,10 +49,10 @@ public class OrdersRestController {
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "сохраняет новый заказ")
-    public ResponseEntity<OrderApiDTO> saveOrder(@RequestBody @Valid OrderApiDTO orderDTO) {
+    public ResponseEntity<OrderCreateDTO> saveOrder(@RequestBody @Valid OrderCreateDTO orderDTO) {
 
         if (orderDTO == null) {
-            return new ResponseEntity<OrderApiDTO>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<OrderCreateDTO>(HttpStatus.BAD_REQUEST);
         }
 
         this.orderService.save(orderConverter.convertApiDTO(orderDTO));
@@ -61,7 +61,7 @@ public class OrdersRestController {
 
     @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "обновляет выбранный заказ")
-    public ResponseEntity<OrderApiUpdateDTO> updateOrder(@RequestBody @Valid OrderApiUpdateDTO orderDTO) {
+    public ResponseEntity<OrderUpdateDTO> updateOrder(@RequestBody @Valid OrderUpdateDTO orderDTO) {
         HttpHeaders headers = new HttpHeaders();
 
         if (orderDTO == null) {

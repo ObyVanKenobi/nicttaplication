@@ -1,6 +1,7 @@
 package com.example.nicttaplication.controllers;
 
 import com.example.nicttaplication.DTO.OrderDTO;
+import com.example.nicttaplication.apiDTO.OrderUpdateDTO;
 import com.example.nicttaplication.converters.OrderConverter;
 import com.example.nicttaplication.models.Order;
 import com.example.nicttaplication.models.Product;
@@ -68,18 +69,18 @@ public class OrdersController {
 
     @GetMapping("/order-update/{id}")
     public String editOrder(@PathVariable("id") Long id, Model model) {
-        OrderDTO orderDTO = new OrderDTO();
+        OrderUpdateDTO orderDTO = new OrderUpdateDTO();
         orderDTO.setId(id);
         model.addAttribute("orderDTO", orderDTO);
         return "update_order";
     }
 
     @PostMapping("/order-update")
-    public String Order(@ModelAttribute("orderDTO") OrderDTO orderDTO, BindingResult bindingResult) {
+    public String Order(@ModelAttribute("orderDTO")@Valid OrderUpdateDTO orderDTO, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "update_order";
         }
-        orderService.save(orderConverter.convert(orderDTO));
+        orderService.save(orderConverter.convertApiDTOForUpdate(orderDTO));
         return "redirect:/orders";
     }
 }

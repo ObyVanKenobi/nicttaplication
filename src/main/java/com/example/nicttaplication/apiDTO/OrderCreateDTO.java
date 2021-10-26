@@ -2,8 +2,10 @@ package com.example.nicttaplication.apiDTO;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
-public class OrderApiUpdateDTO {
+public class OrderCreateDTO {
     private String email;
-    private Long id;
+    private List<Long> productIdList;
 }
